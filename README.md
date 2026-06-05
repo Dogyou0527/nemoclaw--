@@ -164,11 +164,13 @@ python3 manage_memory.py show
 
 ## 🔖 版本資訊
 
-| 項目 | 版本 |
-|---|---|
-| 本專案 (NemoClaw Proxy) | `v1.0.0` |
-| 測試相容的 OpenClaw | `2026.5.22` |
-| Python | `3.9+` |
+| 項目 | 版本 | 說明 |
+|---|---|---|
+| 本專案 (Proxy) | `v1.0.0` | 代理伺服器層 |
+| NemoClaw (CLI) | `v1.0` | 終端機指令介面 |
+| OpenClaw (Sandbox)| `2026.5.22` | AI 執行沙盒環境 |
+| 語言模型 (LLM) | `Gemini 1.5 Pro` | 建議使用 Gemini 1.5 Pro 以獲得最佳理解力與 Token 上限 |
+| Python | `3.9+` | |
 
 ---
 
