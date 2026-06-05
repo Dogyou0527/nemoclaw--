@@ -91,16 +91,31 @@ FOURSQUARE_API_KEY=your_foursquare_key
 2. 啟用 Gmail API，下載 `credentials.json` 放至專案根目錄
 3. 第一次執行時會自動引導您完成 OAuth 登入
 
-### 4. 啟動系統
+### 4. 沙盒初始化與錯誤修補 (首次執行必做)
+
+為了解決沙盒安全性限制與套件 Bug，請在第一次使用前執行以下腳本：
 
 ```bash
-./start_proxy.sh
+# 1. 將本地防火牆白名單安裝進沙盒
+./scripts/setup_sandbox.sh
+
+# 2. 修補沙盒內 Gemini 400 Bad Request Bug
+python3 scripts/patch_gemini_bug.py
+```
+
+### 5. 啟動系統
+
+```bash
+./scripts/start_proxy.sh
 ```
 
 啟動後會自動：
 1. 在 Port 80 啟動 API 伺服器
 2. 嘗試建立 LocalTunnel 通道（讓沙盒可以連回主機）
 3. 啟動 Discord Bot
+
+> **如果您需要開啟命令列對話介面 (TUI)**：
+> 請使用 `./scripts/start_tui.sh` 來啟動，以避免 HTTP_PROXY 環境變數污染導致連線斷線。
 
 ---
 
