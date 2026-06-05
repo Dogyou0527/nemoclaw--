@@ -29,8 +29,8 @@ memory_backup.json
 failed_stdout.log
 
 # Prompt files containing personal/runtime data
-prompts/ntu_prompt.txt
-prompts/mail_prompt.txt
+ntu_prompt.txt
+mail_prompt.txt
 prompts/cool_notify_prompt.txt
 prompts/gmail_urgent_prompt.txt
 
