@@ -1,0 +1,12 @@
+preset:
+  name: allow-weather
+network_policies:
+  allow-weather:
+    name: allow-weather
+    endpoints:
+      - host: wttr.in
+        port: 80
+        access: full
+      - host: wttr.in
+        port: 443
+        access: full

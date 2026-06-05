@@ -1,0 +1,18 @@
+{
+    "_note": "帳號密碼已移至 .env 檔案，請勿在此檔案填寫敏感資訊",
+    "gmail": {
+        "block_keywords": ["unsubscribe", "newsletter", "取消訂閱", "優惠", "折扣", "促銷", "廣告"]
+    },
+    "schedule": {
+        "_note": "填入您的每週課表，晨報會自動讀取今天的課程",
+        "Monday": [
+            {"course": "課程名稱", "periods": "1,2節", "time": "08:10–10:00", "room": "教室名稱"}
+        ],
+        "Tuesday": [],
+        "Wednesday": [],
+        "Thursday": [],
+        "Friday": [],
+        "Saturday": [],
+        "Sunday": []
+    }
+}

@@ -1,0 +1,26 @@
+系統指示：你的名字叫「龍蝦 (NemoClaw)」，是住在沙箱裡的全能 AI 助理。
+以下是剛收到的新信件列表，請你判斷這些信對一個台大大學生來說是否重要。
+
+【重要的定義】：與課業直接相關（教授、系辦、考試、截止日）、需要採取行動的信件。
+【不重要的定義】：學校廣播、活動邀請、問卷、獎學金宣傳等無需立即處理的信。
+
+⚠️ 決策規則（非常重要，必須嚴格遵守）：
+- 如果判斷為【不重要】：你必須完全沉默。不要呼叫任何 curl 指令，不要輸出任何文字，直接結束。
+- 如果判斷為【重要】：才呼叫終端機執行以下 curl 指令發送通知：
+curl -sS -X POST http://host.docker.internal/discord-proxy -H 'Content-Type: application/json' -d '{"content": "整理好的通知內容"}'
+
+【待裁決信件】:
+- 統計學 Statistics | 週一 16:16 | 更正：5/19 統計學 第四次小考： 統計學 Statistics |
+- 王泓仁教務長 | 週一 15:47 | 「校內訊息」兩堂工作坊 --【表達與溝通協商技巧】、【AI 剪輯新紀元】開放報名 Two Workshops -- “Communication and Negotiation Skills”, “New Era of AI Editing: Giving Time Back to Creativity with FCP AI” Open Registration |
+- 統計學 Statistics | 週一 14:09 | 關於 5/19 第三次小考： 統計學 Statistics |
+- 健檢系統 | 週一 09:37 | 國立臺灣大學新生健康檢查結果通知單(本系統無法過濾已繳回覆複檢單者，已完成繳回複檢單者可忽略此信) |
+- 王泓仁教務長 | 週五 18:05 | 「校內訊息」【 創意創業學招生中🚀 】讓點子成為改變的開始！第 19 屆臺大創意創業學程 招生正式啟動【NTU D-School Creative and Entrepreneurship Program 📣】Let your ideas be the start of change! The 19th Batch of NTU Creative and Entrepreneurship Program is now open for applications 🚀 |
+- 陳盈盈 | 週五 10:45 | 「校內訊息」5/18 倒數三天｜暑假去矽谷找答案！15萬補助 × 7週沉浸探索 |
+- 校內訊息轉發服務 | 週五 05:59 | 「校內訊息」2026/05/15 來週校園活動、演講、研討會一覽表 |
+- 王泓仁教務長 | 週四 15:15 | 「校內訊息」115 年全國夏季學院 5/18 開始第二階段報名，暑假跨校通識抵學分！Summer College Phase 2 registration starts May 18 — cross-university credit opportunities this summer! |
+- 王泓仁教務長 | 週四 13:30 | 「校內訊息」教務處滿意度調查延長至115年5月21日止Office of Academic Affairs Customer Satisfaction Survey Extended to May 21, 2026 |
+- NTU郵件過濾系統 | 週四 12:00 | 垃圾信隔離通知 (Spam Quarantine Notification) |
+- 陳林祈主任 | 週四 10:15 | 「校內訊息」通識教育論壇－我的學思歷程：陳建德院士「開創殊勝光源、照見未知萬象： 從龍光束線到臺灣光子源的天人合作傳奇」The Learning Journey of Chien-Te Chen |
+- 袁孝維國際長 | 週三 13:45 | 「校內訊息」【臺大國際引水人計劃】2026 臺大淡路島地方創生見習團 | 地方創生 x 產業創新 x 永續 城鄉 x 文化體驗｜Regional Revitalization x Industrial Innovation x Sustainable Regions x Cultural Immersion |
+- 袁孝維國際長 | 週三 11:45 | 「校內訊息」【國際處】教育部辦理「115年赴韓國研習韓語文交換獎學金」開放申請｜Call for application for Korean Universities’ Korean Language Learning Reciprocal Scholarships September, 2026 - February, 2027 |
+- 國立臺灣大學雙語教育中心 NTU CBE | 週三 04:14 | 【EMI TA In-Service Workshop】Designing Teaching Slides with AI |

@@ -1,0 +1,39 @@
+# Environments
+.env
+venv/
+__pycache__/
+
+# Credentials & Secrets
+credentials.json
+gmail_token.json
+mail_cookies.json
+ntu_cookies.json
+config.json
+.api_key
+
+# Caches and logs
+seen_gmail_cache.txt
+seen_mail_cache.txt
+digest_queue.txt
+mail_state_cache.txt
+*.log
+
+# Runtime data files (auto-generated)
+morning_data.json
+mail_data.json
+ntu_data.json
+urgent_data.json
+seen_cache.json
+memory.json
+memory_backup.json
+failed_stdout.log
+
+# Prompt files containing personal/runtime data
+ntu_prompt.txt
+mail_prompt.txt
+cool_notify_prompt.txt
+gmail_urgent_prompt.txt
+
+# Chrome / Mail browser profiles (gigabytes of session data)
+ntu-chrome-profile/
+ntu-mail-profile/
