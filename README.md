@@ -169,7 +169,7 @@ python3 manage_memory.py show
 
 - **作業系統**: macOS 26.0 (Apple Silicon / Intel)
 - **容器環境**: Docker Desktop for Mac
-- **AI 沙盒**: [OpenClaw](https://openclaw.ai) v2026.5.22 (`/opt/homebrew/bin/nemoclaw`)
+- **AI 沙盒**: NemoClaw v1.0 (基於 OpenClaw v2026.5.22) (`/opt/homebrew/bin/nemoclaw`)
 - **網路工具**: Node.js v18+ & LocalTunnel
 
 > **注意**：啟動腳本中的 `caffeinate` 是 macOS 專屬指令（用來防止休眠）。如果您在 Linux/Windows 上執行，請將 `scripts/start_proxy.sh` 裡的 `caffeinate -i python ...` 改為一般的 `python ...` 即可。
