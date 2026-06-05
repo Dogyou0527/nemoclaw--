@@ -84,6 +84,7 @@ WEBMAIL_PASSWORD=your_password
 GMAIL_EMAIL=your_email@gmail.com
 API_SECRET_KEY=your_random_secret   # 用 python3 -c "import secrets; print(secrets.token_hex(32))" 產生
 FOURSQUARE_API_KEY=your_foursquare_key
+TUNNEL_SUBDOMAIN_PREFIX=your-unique-prefix   # 自訂您的專屬連線前綴
 ```
 
 ### 3. 設定 Google Gmail API（選用）
@@ -112,7 +113,7 @@ FOURSQUARE_API_KEY=your_foursquare_key
 3. 啟動 Discord Bot
 
 > ⚠️ **【極度重要】沙盒連線核准 (openshell term)**：
-> 啟動伺服器後，沙盒對外連線會處於 `[pending]` 狀態而被阻擋。請務必開啟 **另一個終端機視窗**，執行 `openshell term` 進入防火牆總管介面，並按下 `[A]` (Approve All) 來核准 `dogyou-api-*.loca.lt` 以及 `host.docker.internal` 的網路規則。若未核准，AI 助理將完全無法取得外界資料！
+> 啟動伺服器後，沙盒對外連線會處於 `[pending]` 狀態而被阻擋。請務必開啟 **另一個終端機視窗**，執行 `openshell term` 進入防火牆總管介面，並按下 `[A]` (Approve All) 來核准 `<你的前綴>-*.loca.lt` 以及 `host.docker.internal` 的網路規則。若未核准，AI 助理將完全無法取得外界資料！
 
 ---
 
