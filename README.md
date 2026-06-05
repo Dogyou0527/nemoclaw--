@@ -114,6 +114,7 @@ TUNNEL_SUBDOMAIN_PREFIX=your-unique-prefix   # 自訂您的專屬連線前綴
 
 > ⚠️ **【極度重要】沙盒連線核准 (openshell term)**：
 > 啟動伺服器後，沙盒對外連線會處於 `[pending]` 狀態而被阻擋。請務必開啟 **另一個終端機視窗**，執行 `openshell term` 進入防火牆總管介面，並按下 `[A]` (Approve All) 來核准 `<你的前綴>-*.loca.lt` 以及 `host.docker.internal` 的網路規則。若未核准，AI 助理將完全無法取得外界資料！
+> *(註：為了避免 LocalTunnel 斷線，系統會自動生成 `-v1`, `-v2`, `-v3`... 等備用網址，請在清單中看到時一併將它們全數核准。)*
 
 ---
 
