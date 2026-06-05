@@ -111,6 +111,9 @@ FOURSQUARE_API_KEY=your_foursquare_key
 2. 嘗試建立 LocalTunnel 通道（讓沙盒可以連回主機）
 3. 啟動 Discord Bot
 
+> ⚠️ **【極度重要】沙盒連線核准 (openshell term)**：
+> 啟動伺服器後，沙盒對外連線會處於 `[pending]` 狀態而被阻擋。請務必開啟 **另一個終端機視窗**，執行 `openshell term` 進入防火牆總管介面，並按下 `[A]` (Approve All) 來核准 `dogyou-api-*.loca.lt` 以及 `host.docker.internal` 的網路規則。若未核准，AI 助理將完全無法取得外界資料！
+
 ---
 
 ## 📁 Prompt 設定
@@ -167,9 +170,9 @@ python3 manage_memory.py show
 | 項目 | 版本 | 說明 |
 |---|---|---|
 | 本專案 (Proxy) | `v1.0.0` | 代理伺服器層 |
-| NemoClaw (CLI) | `v1.0` | 終端機指令介面 |
+| NemoClaw (CLI) | `v0.0.55` | 終端機指令介面 |
 | OpenClaw (Sandbox)| `2026.5.22` | AI 執行沙盒環境 |
-| 語言模型 (LLM) | `Gemini 1.5 Pro` | 建議使用 Gemini 1.5 Pro 以獲得最佳理解力與 Token 上限 |
+| 語言模型 (LLM) | `Gemini 2.5 Flash` | 建議使用 Gemini 2.5 Flash 以獲得最佳理解力與 Token 處理速度 |
 | Python | `3.9+` | |
 
 ---
