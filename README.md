@@ -57,7 +57,8 @@ pip install -r requirements.txt
 ```
 
 需要另外安裝：
-- [Node.js](https://nodejs.org/) — 用於 `localtunnel`
+- **[NemoClaw](https://openclaw.ai)** — 本專案的核心 AI 沙盒，請確保終端機可執行 `nemoclaw` 指令。
+- [Node.js](https://nodejs.org/) — 用於執行 `localtunnel`
 - `npm install -g localtunnel`
 - [Playwright](https://playwright.dev/python/) — 用於 NTU COOL 自動化登入
 
