@@ -17,7 +17,7 @@ NemoClaw 是一套讓 AI 沙盒（OpenClaw）能夠透過 Discord 與使用者�
        ↕  LocalTunnel HTTPS
 [ OpenClaw 沙盒 — AI 推理層 ]
        ↕  執行 Python 腳本
-[ food_picker.py / manage_memory.py — 工具腳本層 ]
+[ tools/food_picker.py / tools/manage_memory.py — 工具腳本層 ]
 ```
 
 ---
@@ -40,13 +40,13 @@ NemoClaw 是一套讓 AI 沙盒（OpenClaw）能夠透過 Discord 與使用者�
 
 | 注入內容 | 說明 |
 |---|---|
-| `catchup_prompt.txt` | 系統指示（角色設定 + 可用 API 指令）|
+| `prompts/catchup_prompt.txt` | 系統指示（角色設定 + 可用 API 指令）|
 | `memory.json` | 使用者長期記憶 |
 | `morning_data.json` | 最新晨報資料 |
 | `mail_data.json` | 最新信件摘要 |
 | `ntu_data.json` | 最新 NTU COOL 通知 |
-| `food_picker.py` | 午餐推薦腳本 |
-| `manage_memory.py` | 記憶管理腳本 |
+| `tools/food_picker.py` | 午餐推薦腳本 |
+| `tools/manage_memory.py` | 記憶管理腳本 |
 | `.api_key` | API Key（Base64 編碼注入，不洩漏 .env）|
 
 ---
@@ -88,13 +88,13 @@ NemoClaw 是一套讓 AI 沙盒（OpenClaw）能夠透過 Discord 與使用者�
 
 ### Layer 3：工具腳本層
 
-**`food_picker.py`** — 午餐推薦引擎
+**`tools/food_picker.py`** — 午餐推薦引擎
 - 呼叫 `api_server.py` 的 `/food-nearby` 取得附近餐廳
 - 讀取 `memory.json` 排除近 3 天吃過的店
 - 讀取 `food_list.json` 加入個人收藏（優先推薦）
 - 根據 `--mood` 參數過濾標籤
 
-**`manage_memory.py`** — 記憶管理器
+**`tools/manage_memory.py`** — 記憶管理器
 - `add` / `list` / `del` — 管理待辦事項和記憶
 - `food` — 記錄今天吃的餐廳
 - `fav-add` / `fav-list` — 管理長期餐廳收藏
@@ -113,14 +113,14 @@ start_localtunnel() 依序嘗試 {PREFIX}-v1 ～ {PREFIX}-v5
 某個子網域連線成功，得到 actual_url
        ↓
 update_prompt_file(actual_url) 執行 Regex 替換：
-  - catchup_prompt.txt 中所有 loca.lt 網址 → 替換
-  - food_picker.py 中 HOST_API_BASE → 替換
+  - prompts/catchup_prompt.txt 中所有 loca.lt 網址 → 替換
+  - tools/food_picker.py 中 HOST_API_BASE → 替換
        ↓
 沙盒下次被呼叫時，拿到的 catchup_prompt 裡面
 已經含有最新的連線網址
 ```
 
-> **注意：** `catchup_prompt.txt` 和 `food_picker.py` 裡面的 `loca.lt` 網址是「暫存佔位符」，**會在每次 api_server 啟動時被自動覆蓋**。不要在這兩個檔案裡手動寫死網址。
+> **注意：** `prompts/catchup_prompt.txt` 和 `tools/food_picker.py` 裡面的 `loca.lt` 網址是「暫存佔位符」，**會在每次 api_server 啟動時被自動覆蓋**。不要在這兩個檔案裡手動寫死網址。
 
 ---
 
@@ -190,9 +190,9 @@ def fetch_your_data() -> str:
 
 ---
 
-### 4.3 在 `catchup_prompt.txt` 新增 AI 指令
+### 4.3 在 `prompts/catchup_prompt.txt` 新增 AI 指令
 
-每個新功能都需要在 `catchup_prompt.txt` 中讓 AI 知道怎麼呼叫。格式如下：
+每個新功能都需要在 `prompts/catchup_prompt.txt` 中讓 AI 知道怎麼呼叫。格式如下：
 
 ```
 - 你的功能描述 (觸發關鍵字1、觸發關鍵字2)：
@@ -219,8 +219,8 @@ data_files = [
     "mail_data.json",
     "ntu_data.json",
     "urgent_data.json",
-    "food_picker.py",
-    "manage_memory.py",
+    "tools/food_picker.py",
+    "tools/manage_memory.py",
     "your_data.json",   # ← 加在這裡
 ]
 ```
@@ -236,7 +236,7 @@ data_files = [
   │
   ▼
 proxy.py (poll_discord, 每 2 秒)
-  │ 讀取 catchup_prompt.txt, memory.json, *_data.json
+  │ 讀取 catchup_prompt.txt (來自 prompts/), memory.json, *_data.json
   │ 組裝指令 → 傳入 OpenClaw 沙盒
   ▼
 OpenClaw 沙盒 (NemoClaw AI)
@@ -276,10 +276,10 @@ proxy.py 把 AI 的回覆 → 發送到 Discord ✅
 | `.env.example` | ✅ | 設定範本（供新使用者參考）|
 | `config.json` | ❌ 排除 | 個人課表、個人設定 |
 | `config.json.example` | ✅ | 設定範本（說明格式）|
-| `catchup_prompt.txt` | ✅ | AI 行為規則（無個人資訊）|
-| `morning_prompt.txt` | ✅ | 晨報格式 Prompt |
-| `ntu_prompt.txt` | ❌ 排除 | 含個人學期資料，執行期產生 |
-| `mail_prompt.txt` | ❌ 排除 | 含真實信件內容，執行期產生 |
+| `prompts/catchup_prompt.txt` | ✅ | AI 行為規則（無個人資訊）|
+| `prompts/morning_prompt.txt` | ✅ | 晨報格式 Prompt |
+| `prompts/ntu_prompt.txt` | ❌ 排除 | 含個人學期資料，執行期產生 |
+| `prompts/mail_prompt.txt` | ❌ 排除 | 含真實信件內容，執行期產生 |
 | `food_list.json` | ✅ | 空的餐廳清單範本 |
 | `memory.json` | ❌ 排除 | 個人記憶，執行期產生 |
 | `*_data.json` | ❌ 排除 | 所有執行期資料 |

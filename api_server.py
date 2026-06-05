@@ -12,6 +12,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# 加入 fetchers/ 子目錄到 Python 搜尋路徑
+_BASE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(_BASE, "fetchers"))
+
 import ntu_fetcher
 import mail_fetcher
 import gmail_fetcher
@@ -104,8 +108,8 @@ def async_fetch_morning_report():
             json.dump(data, f, ensure_ascii=False, indent=2)
         _last_fetch_times["morning_report"] = datetime.now(TW_TZ).isoformat()
 
-        # 讀取 morning_prompt.txt 當作回呼訊息
-        prompt_path = "morning_prompt.txt"
+        # 讀取 prompts/morning_prompt.txt 當作回呼訊息
+        prompt_path = os.path.join(_BASE, "prompts", "morning_prompt.txt")
         if os.path.exists(prompt_path):
             with open(prompt_path, "r", encoding="utf-8") as f:
                 morning_msg = f.read().strip()
@@ -366,7 +370,10 @@ def food_nearby():
 # LocalTunnel 自動維護
 # ──────────────────────────────────────────────
 def update_prompt_file(new_url):
-    files_to_update = ["catchup_prompt.txt", "food_picker.py"]
+    files_to_update = [
+        os.path.join(_BASE, "prompts", "catchup_prompt.txt"),
+        os.path.join(_BASE, "tools", "food_picker.py"),
+    ]
     for file_path in files_to_update:
         if not os.path.exists(file_path):
             continue

@@ -29,10 +29,10 @@ memory_backup.json
 failed_stdout.log
 
 # Prompt files containing personal/runtime data
-ntu_prompt.txt
-mail_prompt.txt
-cool_notify_prompt.txt
-gmail_urgent_prompt.txt
+prompts/ntu_prompt.txt
+prompts/mail_prompt.txt
+prompts/cool_notify_prompt.txt
+prompts/gmail_urgent_prompt.txt
 
 # Chrome / Mail browser profiles (gigabytes of session data)
 ntu-chrome-profile/

@@ -116,7 +116,7 @@ def extract_payloads_from_stdout(stdout_text):
 def process_and_send_to_sandbox(combined_msg, is_system_callback=False):
     # 讀取系統 Prompt
     system_prompt = ""
-    prompt_path = os.path.join(BASE_DIR, "catchup_prompt.txt")
+    prompt_path = os.path.join(BASE_DIR, "prompts", "catchup_prompt.txt")
     if os.path.exists(prompt_path):
         try:
             with open(prompt_path, "r", encoding="utf-8") as f:
@@ -140,7 +140,15 @@ def process_and_send_to_sandbox(combined_msg, is_system_callback=False):
     b64_memory = base64.b64encode(memory_content.encode('utf-8')).decode('utf-8')
 
     # 注入所有資料檔與執行腳本 (絕對不包含 .env)
-    data_files = ["morning_data.json", "mail_data.json", "ntu_data.json", "urgent_data.json", "food_picker.py", "manage_memory.py"]
+    # 格式：(本機路徑, 沙盒內的檔名)
+    data_files = [
+        ("morning_data.json",          "morning_data.json"),
+        ("mail_data.json",             "mail_data.json"),
+        ("ntu_data.json",              "ntu_data.json"),
+        ("urgent_data.json",           "urgent_data.json"),
+        ("tools/food_picker.py",       "food_picker.py"),
+        ("tools/manage_memory.py",     "manage_memory.py"),
+    ]
     data_injections = ""
     
     # 單獨注入內部通訊用的 API_SECRET_KEY，保護真正的 .env 不外洩
@@ -149,14 +157,14 @@ def process_and_send_to_sandbox(combined_msg, is_system_callback=False):
         b64_key = base64.b64encode(internal_api_key.encode('utf-8')).decode('utf-8')
         data_injections += f"echo '{b64_key}' | base64 -d > /sandbox/.openclaw/workspace/.api_key\n"
         
-    for df in data_files:
-        df_path = os.path.join(BASE_DIR, df)
+    for local_name, sandbox_name in data_files:
+        df_path = os.path.join(BASE_DIR, local_name)
         if os.path.exists(df_path):
             try:
                 with open(df_path, "r", encoding="utf-8") as f:
                     content = f.read()
                 b64_content = base64.b64encode(content.encode('utf-8')).decode('utf-8')
-                data_injections += f"echo '{b64_content}' | base64 -d > /sandbox/.openclaw/workspace/{df}\n"
+                data_injections += f"echo '{b64_content}' | base64 -d > /sandbox/.openclaw/workspace/{sandbox_name}\n"
             except Exception:
                 pass
 

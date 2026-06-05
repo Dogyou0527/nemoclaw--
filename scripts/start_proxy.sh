@@ -1,14 +1,15 @@
 #!/bin/bash
-# 檔名: start_proxy.sh
+# 檔名: scripts/start_proxy.sh
 # 說明: 一鍵啟動 NemoClaw 龍蝦 AI 助理系統（api_server + proxy）
 
 echo "=========================================="
 echo "  🦞 NemoClaw 龍蝦 AI 助理系統啟動中..."
 echo "=========================================="
 
-# 確保切換到正確的目錄
+# 確保切換到專案根目錄（scripts/ 的上一層）
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
-cd "$SCRIPT_DIR"
+PROJECT_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
+cd "$PROJECT_ROOT"
 
 # 啟用虛擬環境
 source venv/bin/activate
@@ -55,3 +56,4 @@ sleep 3
 echo "🚀 正在啟動 Discord 代理伺服器..."
 echo "   按 Ctrl+C 可停止所有服務"
 caffeinate -i python proxy.py
+
