@@ -140,33 +140,6 @@ TUNNEL_SUBDOMAIN_PREFIX=your-unique-prefix   # 自訂您的專屬連線前綴
 
 ---
 
-## 🛠️ 開發相關
-
-### 手動查詢午餐
-
-```bash
-python3 food_picker.py --location 博雅館 --meal lunch
-python3 food_picker.py --location 公館 --mood 想吃麵
-```
-
-### 查看 API Server 日誌
-
-```bash
-tail -f /tmp/api_server.log
-```
-
-### 管理記憶
-
-```bash
-# 新增最愛餐廳
-python3 manage_memory.py fav-add "鬍鬚張" --tags 台式 滷肉飯 --meal lunch
-
-# 查看記憶內容
-python3 manage_memory.py show
-```
-
----
-
 ## 🔖 版本資訊
 
 | 項目 | 版本 | 說明 |
